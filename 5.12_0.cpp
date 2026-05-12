@@ -30,6 +30,8 @@ int main()
 					dp[i][j] = 2;
 				else if (s[i] == s[j])
 					dp[i][j] = dp[i + 1][j - 1] + 2;
+				else if (l == 2)
+					dp[i][j] = 1;
 				else
 					dp[i][j] = Max(dp[i + 1][j], dp[i][j - 1]);
 			}
@@ -58,6 +60,7 @@ int main()
 				right--;
 		}
 	}
+	LPS[tmp] = '\0';
 	if (left == right + 1)
 	{
 		// 偶数
