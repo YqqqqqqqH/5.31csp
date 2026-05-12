@@ -1,0 +1,14 @@
+5.12_0.cpp
+  h_c67202724abd74 33-34,63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.4",
+  "base_commit_sha": "eb27f03a3f4cd1b7d7c7367b661d951fb08a0a96",
+  "prompts": {},
+  "humans": {
+    "h_c67202724abd74": {
+      "author": "Felix-Yang887 <felix@example.com>"
+    }
+  }
+}
