@@ -10,64 +10,41 @@ bool isMatch(char *s, char *p)
 {
 	int m = strlen(s);
 	int n = strlen(p);
-	int i = 0, j = 0;
-	for (int k = 0; k < m; k++)
+
+	// 初始化：空串和空串匹配
+	dp[0][0] = 1;
+
+	// 处理 p 中连续的 '*'，它们可以匹配零次（即跳过）
+	for (int j = 1; j <= n; j++)
 	{
-		if (s[i] == p[j])
+		if (p[j - 1] == '*')
+			dp[0][j] = dp[0][j - 2];
+	}
+
+	// 按行填表
+	for (int i = 1; i <= m; i++)
+	{
+		for (int j = 1; j <= n; j++)
 		{
-			dp[i + 1][j + 1] = 1;
-			i++;
-			j++;
-			continue;
-		}
-		else
-		{
-			if (p[j] != '.' && p[j] != '*')
+			if (p[j - 1] != '*')
 			{
-				return false;
-			}
-			else if (p[j] != '*')
-			{
-				dp[i + 1][j + 1] = 1;
-				i++;
-				j++;
-				continue;
+				// 当前字符匹配（相等或 '.'），取决于左上角
+				if (s[i - 1] == p[j - 1] || p[j - 1] == '.')
+					dp[i][j] = dp[i - 1][j - 1];
 			}
 			else
 			{
-				// p[j] == '*'
-				int tmp0 = i, tmp = j;
-				dp[tmp0 + 1][tmp + 1] = dp[tmp0 + 1][tmp - 1];
+				// p[j-1] == '*'，匹配零次：跳过 x*
+				dp[i][j] = dp[i][j - 2];
 
-				// 找到 * 能够替代的最多的位置
-				while (s[i] == p[tmp - 1])
-				{
-					dp[i + 1][tmp + 1] = dp[tmp0 + 1][tmp + 1];
-					i++;
-				}
-
-				if (p[tmp - 1] == '.')
-				{
-					while (s[i + 1] != p[tmp + 1])
-					{
-						dp[i + 2][tmp + 1] = dp[tmp0 + 1][tmp + 1];
-						i++;
-					}
-					if (s[i + 1] == '\0')
-						return true;
-				}
+				// 匹配一次或多次：当前 s 字符和 * 前面的字符匹配
+				if (s[i - 1] == p[j - 2] || p[j - 2] == '.')
+					dp[i][j] = dp[i][j] || dp[i - 1][j];
 			}
 		}
-		if (i == m)
-		{
-			return true;
-		}
 	}
-	if (i == m)
-	{
-		return true;
-	}
-	return false;
+
+	return dp[m][n];
 }
 
 int main()
@@ -79,6 +56,6 @@ int main()
 	p[strcspn(p, "\n")] = '\0';
 
 	bool result = isMatch(s, p);
-	printf((result > 0) ? "true" : "false");
+	printf(result ? "true" : "false");
 	return 0;
 }
