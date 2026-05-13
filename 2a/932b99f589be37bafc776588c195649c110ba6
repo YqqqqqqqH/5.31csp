@@ -1,0 +1,19 @@
+5.13_0.cpp
+  s_00e8c68800ebc5::t_a75f512e1d32d6 13-18,20-27,29,31-33,37-38,40-42,46-47,59
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.4",
+  "base_commit_sha": "2a932b99f589be37bafc776588c195649c110ba6",
+  "prompts": {},
+  "sessions": {
+    "s_00e8c68800ebc5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "30d9ed31-a437-464d-abdf-64e17f03c794",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Felix-Yang887 <felix@example.com>"
+    }
+  }
+}
